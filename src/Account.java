@@ -30,7 +30,7 @@ public class Account {
         return clientId;
     }
 
-    public synchronized double getBalance() {
+    public double getBalance() {
         return balance;
     }
 
