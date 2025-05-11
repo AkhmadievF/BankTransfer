@@ -31,8 +31,8 @@ public class MainWindow extends Application {
 
         Label welcomeLabel = new Label("Добро пожаловать, " + user.getUsername() + "!");
 
-        Account account = bank.getAccountByClientId(user.getClientId());
-        Label balanceLabel = new Label("Ваш баланс: " + account.getBalance());
+//        Account account = bank.getAccountByClientId(user.getClientId());
+        Label balanceLabel = new Label("На вашем счету: " + from.getBalance());
         Button transferButton = new Button("перевести на счет:");
 
         TextField doubleField = new TextField();
@@ -70,26 +70,17 @@ public class MainWindow extends Application {
             balanceLabel.setText("На вашем счету: " + from.getBalance());
         });
         Button refreshButton = new Button("🔄");
-        balanceValueLabel = new Label(String.format("%.2f", account.getBalance()));
+        balanceValueLabel = new Label(String.format("%.2f", from.getBalance()));
         refreshButton.setOnAction(e -> start(primaryStage));
 
 
         layout.getChildren().addAll(welcomeLabel, balanceLabel,
                 transferButton, refreshButton, doubleField, toClientIdField,
-                submitButton, resultLabel
-        );
+                submitButton, resultLabel);
 
         Scene scene = new Scene(layout, 300, 450);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Главное меню");
         primaryStage.show();
     }
-
-    private Account findAccount() {
-        if (to.getAccountId().equals(getClientID)) {
-            return to;
-        }
-        return to;
-    }
-
 }

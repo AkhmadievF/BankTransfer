@@ -102,7 +102,7 @@ public class TransactionTask implements Runnable {
                     "Transfer " + String.format("%.2f", amount) +
                     " from " + fromAccount.getAccountId() +
                     " to " + toAccount.getAccountId() +
-                    " — " + (success ? "SUCCESS" : "FAILED (not enough funds)"));
+                    " — " + (success ? "Успешно" : "Отказано (недостаточно средств на счете)"));
 
         } catch (Exception e) {
             System.err.println("[" + Thread.currentThread().getName() + "] Error during transaction: " + e.getMessage());

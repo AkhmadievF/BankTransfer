@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,7 +14,6 @@ public class Bank {
     public void addAccount(Account account) {
         accounts.putIfAbsent(account.getAccountId(), account);
     }
-
     /**
      * Находит счёт по ID
      */

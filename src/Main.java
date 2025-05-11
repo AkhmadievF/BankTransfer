@@ -2,14 +2,8 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
 public class Main extends Application {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args){
         launch(args);
     }
     @Override
@@ -43,10 +37,10 @@ public class Main extends Application {
         bank.addUser(user5);
         bank.addUser(user6);
 
-        List<Account> allAccounts = Arrays.asList(acc1, acc2, acc3, acc4, acc5, acc6);
+//        List<Account> allAccounts = Arrays.asList(acc1, acc2, acc3, acc4, acc5, acc6);
 
-        int threadCount = 10;
-        ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+//        int threadCount = 10;
+//        ExecutorService executor = Executors.newFixedThreadPool(threadCount);
 
 //        System.out.println("Starting transactions...");
 //        for (int i = 0; i < 100; i++) {
@@ -57,8 +51,8 @@ public class Main extends Application {
         LoginWindow loginWindow = new LoginWindow(bank);
         loginWindow.start(stage);
 
-        executor.shutdown();
-        executor.awaitTermination(1, TimeUnit.MINUTES);
+//        executor.shutdown();
+//        executor.awaitTermination(1, TimeUnit.MINUTES);
 
         System.out.println("\nSimulation finished.");
         System.out.println("Final balance in the system: " + bank.getTotalBalance());

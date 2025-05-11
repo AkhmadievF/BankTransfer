@@ -3,7 +3,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class LoginWindow extends Application {
@@ -58,7 +57,7 @@ public class LoginWindow extends Application {
 
         Scene scene = new Scene(grid, 350, 150);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Login");
+        primaryStage.setTitle("Авторизация");
         primaryStage.show();
     }
 
