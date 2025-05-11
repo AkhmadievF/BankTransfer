@@ -60,7 +60,6 @@ public class TransactionTask implements Runnable {
     private final Bank bank;
     private final Account from;
     private final Account to;
-    private static final Random random = new Random();
     private final double amount;
 
     public TransactionTask(Bank bank, Account from, Account to, double amount) {

@@ -1,9 +1,7 @@
-import com.sun.javafx.scene.control.DoubleField;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -13,34 +11,41 @@ public class MainWindow extends Application {
     private final Bank bank;
     private final User user;
     private Label balanceValueLabel;
-    private Account account;
+    private final Account from;
+    private final Account to;
     double value;
+    String getClientID = "";
+
     public MainWindow(Bank bank, User user) {
         this.bank = bank;
         this.user = user;
-        this.account = bank.getAccountByClientId(user.getClientId());
+        this.from = bank.getAccountByClientId(user.getClientId());
+        this.to = bank.getAccountByClientId(user.getClientId());
     }
-    Account acc2 = new Account("max", "2", 0);
+
     @Override
     public void start(Stage primaryStage) {
+
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(10));
 
-        Label welcomeLabel = new Label("Welcome, " + user.getUsername() + "!");
+        Label welcomeLabel = new Label("Добро пожаловать, " + user.getUsername() + "!");
 
         Account account = bank.getAccountByClientId(user.getClientId());
-        Label balanceLabel = new Label("Your balance: " + account.getBalance());
-        Button transferButton = new Button("transfer to:");
+        Label balanceLabel = new Label("Ваш баланс: " + account.getBalance());
+        Button transferButton = new Button("перевести на счет:");
 
         TextField doubleField = new TextField();
         doubleField.setPromptText("Введите сумму");
+        TextField toClientIdField = new TextField();
+        toClientIdField.setPromptText("Введите номер счета:");
 
-        Label resultLabel = new Label("Результат будет здесь");
+        Label resultLabel = new Label();
 
         Button submitButton = new Button("Подтвердить");
         submitButton.setOnAction(event -> {
             String input = doubleField.getText().trim();
-
+            getClientID = toClientIdField.getText().trim();
             try {
                 value = Double.parseDouble(input);
 
@@ -57,28 +62,34 @@ public class MainWindow extends Application {
                 resultLabel.setStyle("-fx-text-fill: red;");
             }
         });
+
         transferButton.setOnAction(e -> {
 
-            TransactionTask task = new TransactionTask(bank, account, acc2, value);
+            TransactionTask task = new TransactionTask(bank, from, bank.getAccountByClientId(getClientID), value);
             new Thread(task).start();
-            balanceLabel.setText("Your balance: " + account.getBalance());
+            balanceLabel.setText("На вашем счету: " + from.getBalance());
         });
-        Button refreshButton = new Button("🔄 Refresh");
+        Button refreshButton = new Button("🔄");
         balanceValueLabel = new Label(String.format("%.2f", account.getBalance()));
-        refreshButton.setOnAction(e -> refreshBalance());
+        refreshButton.setOnAction(e -> start(primaryStage));
+
+
         layout.getChildren().addAll(welcomeLabel, balanceLabel,
-                transferButton,refreshButton, doubleField,
+                transferButton, refreshButton, doubleField, toClientIdField,
                 submitButton, resultLabel
         );
 
-        Scene scene = new Scene(layout, 300, 150);
+        Scene scene = new Scene(layout, 300, 450);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Main Menu");
+        primaryStage.setTitle("Главное меню");
         primaryStage.show();
     }
 
-    private void refreshBalance() {
-        double currentBalance = account.getBalance();
-        balanceValueLabel.setText(String.format("%.2f", currentBalance));
+    private Account findAccount() {
+        if (to.getAccountId().equals(getClientID)) {
+            return to;
+        }
+        return to;
     }
+
 }

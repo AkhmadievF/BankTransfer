@@ -21,13 +21,13 @@ public class LoginWindow extends Application {
         grid.setVgap(8);
         grid.setHgap(10);
 
-        Label userLabel = new Label("Username:");
+        Label userLabel = new Label("Имя пользователя:");
         TextField userField = new TextField();
 
-        Label passLabel = new Label("Password:");
+        Label passLabel = new Label("Пароль:");
         PasswordField passField = new PasswordField();
 
-        Button loginButton = new Button("Login");
+        Button loginButton = new Button("Войти");
 
         Label messageLabel = new Label();
 
@@ -56,7 +56,7 @@ public class LoginWindow extends Application {
         grid.add(messageLabel, 1, 3);
         grid.add(btn, 0, 3);
 
-        Scene scene = new Scene(grid, 300, 150);
+        Scene scene = new Scene(grid, 350, 150);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Login");
         primaryStage.show();
