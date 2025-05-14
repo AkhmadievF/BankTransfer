@@ -17,9 +17,7 @@ public class Bank {
     /**
      * Находит счёт по ID
      */
-    public Account getAccount(String accountId) {
-        return accounts.get(accountId);
-    }
+
 
     /**
      * Переводит сумму с одного счёта на другой
@@ -75,5 +73,14 @@ public class Bank {
                 .filter(acc -> acc.getClientId().equals(clientId))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public Account getAccount(String accountId) {
+        for (Account acc: accounts.values()){
+            if (acc.getClientId().equals(accountId)){
+                return acc;
+            }
+        }
+        return null;
     }
 }

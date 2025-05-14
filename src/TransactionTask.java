@@ -80,10 +80,7 @@ public class TransactionTask implements Runnable {
 //            while (toAccount == fromAccount && allAccounts.size() > 1) {
 //                toAccount = getRandomAccount();
 //            }
-
-            double maxTransfer = fromAccount.getBalance();
-
-
+//            double maxTransfer = fromAccount.getBalance();
 //            if (maxTransfer > 0) {
 //                amount = random.nextDouble(maxTransfer); // Случайная сумма до баланса
 //            } else {
